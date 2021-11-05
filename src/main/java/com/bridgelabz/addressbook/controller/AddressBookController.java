@@ -54,5 +54,11 @@ public class AddressBookController
 
     }
 
+    //curl -X DELETE -H "Content-Type: application/json" localhost:8080/addressbookservice/delete/1 -w "\n"
+    @DeleteMapping("/delete/{contactId}")
+    public ResponseEntity<String> deleteContactData(@PathVariable("contactId") int contactId)
+    {
+        return new ResponseEntity<String>("Delete call success for id "+contactId,HttpStatus.OK);
+        
     }
 }
