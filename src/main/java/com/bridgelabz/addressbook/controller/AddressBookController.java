@@ -2,6 +2,8 @@ package com.bridgelabz.addressbook.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.bridgelabz.addressbook.dto.ContactDTO;
 import com.bridgelabz.addressbook.dto.ResponseDTO;
 import com.bridgelabz.addressbook.model.Contact;
@@ -51,7 +53,7 @@ public class AddressBookController
     //curl -X POST -H "Content-Type: application/json" -d '{"firstName": "Lisa","lastName": "Anne","address":"abc street,4th cross"}' "http://localhost:8080/addressbookservice/create" -w "\n"
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> addContactData(@RequestBody ContactDTO contactDTO)
+    public ResponseEntity<ResponseDTO> addContactData(@Valid @RequestBody ContactDTO contactDTO)
     {
         Contact contact = addressbookservice.createContact(contactDTO);
         ResponseDTO response = new ResponseDTO("Created contact data for",contact);
@@ -61,7 +63,7 @@ public class AddressBookController
 
     //curl -X PUT -H "Content-Type: application/json" -d '{"firstName": "Lisa","lastName": "Anne","address":"abc street,4th cross"}' "http://localhost:8080/addressbookservice/update/1" -w "\n"
     @PutMapping("/update/{contactId}")
-    public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contactId") int contactId,@RequestBody ContactDTO contactDTO)
+    public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contactId") int contactId,@Valid @RequestBody ContactDTO contactDTO)
     {
         Contact contact = addressbookservice.updateContact(contactId,contactDTO);
         ResponseDTO response = new ResponseDTO("Updated contact data for",contact);
