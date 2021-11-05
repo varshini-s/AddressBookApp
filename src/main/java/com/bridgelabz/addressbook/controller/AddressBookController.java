@@ -37,4 +37,14 @@ public class AddressBookController
 
 
     }
+    //curl -X POST -H "Content-Type: application/json" -d '{"name": "Lisa","salary":2000}' "http://localhost:8080/addressbookservice/create" -w "\n"
+
+    @PostMapping("/create")
+    public ResponseEntity<String> addContactData(@RequestBody ContactDTO contactDTO)
+    {
+        return new ResponseEntity<String>("Created contact data for "+contactDTO,HttpStatus.OK);
+
+    }
+
+    }
 }
