@@ -46,5 +46,13 @@ public class AddressBookController
 
     }
 
+    //curl -X PUT -H "Content-Type: application/json" -d '{"name": "Lisa","salary": 4000}' "http://localhost:8080/addressbookservice/update/1" -w "\n"
+    @PutMapping("/update/{contactId}")
+    public ResponseEntity<String> updateContactData(@PathVariable("contactId") int contactId,@RequestBody ContactDTO contactDTO)
+    {
+        return new ResponseEntity<String>("Updated contact data for "+contactDTO,HttpStatus.OK);
+
+    }
+
     }
 }
