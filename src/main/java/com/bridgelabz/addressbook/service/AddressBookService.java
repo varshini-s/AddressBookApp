@@ -42,9 +42,13 @@ public class AddressBookService implements IAddressBookService
     public Contact updateContact(int contactId, ContactDTO contactDTO) 
     {
         Contact contact = this.getContactById(contactId);
-        contact.setFirstName(contactDTO.firstName);
-        contact.setLastName(contactDTO.lastName);
+        contact.setName(contactDTO.name);
         contact.setAddress(contactDTO.address);
+        contact.setPhoneNumber(contactDTO.phoneNumber);
+        contact.setCity(contactDTO.city);
+        contact.setState(contactDTO.state);
+        contact.setZip(contactDTO.zip);
+
         contactList.set(contactId-1,contact);
         return contact;
     }
