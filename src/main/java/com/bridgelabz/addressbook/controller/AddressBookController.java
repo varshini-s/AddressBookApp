@@ -28,4 +28,13 @@ public class AddressBookController
 
     }
 
+    //curl localhost:8080/addressbookservice/get/1 -w "\n"
+
+    @GetMapping("/get/{contactId}")
+    public ResponseEntity<String> getContactData(@PathVariable("contactId") int contactId)
+    {
+        return new ResponseEntity<String>("Get call success for id",HttpStatus.OK);
+
+
+    }
 }
