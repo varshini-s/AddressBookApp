@@ -5,11 +5,11 @@ import javax.validation.constraints.Pattern;
 
 public class ContactDTO 
 {
-	@NotEmpty(message = "Contact name cannot be null")
+	@NotEmpty(message = "first name cannot be null")
 	@Pattern(regexp = "^[A-Z]{1}[a-z]{2,}$",message = "first name Invalid")
     public String firstName;
 
-	@NotEmpty(message = "Contact name cannot be null")
+	@NotEmpty(message = "last name cannot be null")
 	@Pattern(regexp = "^[A-Z]{1}[a-z]{2,}$",message = "last name Invalid")
     public String lastName;
 	
