@@ -32,10 +32,15 @@ public @Data class Contact
 	{
 
 	}
+
+	public Contact(int id,ContactDTO contactDTO)
+	{	this.contactId=id;
+		this.updateContact(contactDTO);
+
+	}
     
-	public Contact(int contactId,ContactDTO contactDTO) 
+	public void updateContact(ContactDTO contactDTO) 
 	{
-		this.contactId = contactId;
 		this.name = contactDTO.name;
 		this.address = contactDTO.address;
 		this.phoneNumber = contactDTO.phoneNumber;
