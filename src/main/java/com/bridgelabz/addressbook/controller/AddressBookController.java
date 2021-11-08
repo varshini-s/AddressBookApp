@@ -28,7 +28,6 @@ public class AddressBookController
 {
     @Autowired
     private IAddressBookService addressbookservice;
-	// curl localhost:8080/addressbookservice/ -w "\n"
 
     @RequestMapping(value = {"","/","/get"})
     public ResponseEntity<ResponseDTO> getContactData()
@@ -39,7 +38,6 @@ public class AddressBookController
 
     }
 
-    //curl localhost:8080/addressbookservice/get/1 -w "\n"
 
     @GetMapping("/get/{contactId}")
     public ResponseEntity<ResponseDTO> getContactData(@PathVariable("contactId") int contactId)
@@ -60,6 +58,16 @@ public class AddressBookController
 
     }
 
+    @GetMapping("/city/{city}")
+    public ResponseEntity<ResponseDTO> getContactByCity(@PathVariable("city") String city)
+    {
+        List<Contact> contactList =addressbookservice.getContactByState(city);
+        ResponseDTO response = new ResponseDTO("Get call success to get Contact by city",contactList);
+        return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
+
+    }
+
+
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addContactData(@Valid @RequestBody ContactDTO contactDTO)
     {
@@ -69,7 +77,6 @@ public class AddressBookController
 
     }
 
-    //curl -X PUT -H "Content-Type: application/json" -d '{"firstName": "Lisa","lastName": "Anne","address":"abc street,4th cross"}' "http://localhost:8080/addressbookservice/update/1" -w "\n"
     @PutMapping("/update/{contactId}")
     public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contactId") int contactId,@Valid @RequestBody ContactDTO contactDTO)
     {
@@ -79,7 +86,6 @@ public class AddressBookController
 
     }
 
-    //curl -X DELETE -H "Content-Type: application/json" localhost:8080/addressbookservice/delete/1 -w "\n"
     @DeleteMapping("/delete/{contactId}")
     public ResponseEntity<ResponseDTO> deleteContactData(@PathVariable("contactId") int contactId)
     {
