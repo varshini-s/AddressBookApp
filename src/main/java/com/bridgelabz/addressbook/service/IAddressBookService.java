@@ -15,5 +15,7 @@ public interface IAddressBookService
     Contact updateContact(int contactId,ContactDTO contactDTO);
     void deleteContact(int contactId);
     List<Contact> getContactByState(String state);
+    List<Contact> getContactByCity(String city);
+
 
 }
