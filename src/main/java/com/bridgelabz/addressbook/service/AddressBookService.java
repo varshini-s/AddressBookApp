@@ -66,5 +66,12 @@ public class AddressBookService implements IAddressBookService
         return addressBookRepository.findContactByState(state);
     }
 
+    @Override
+    public List<Contact> getContactByCity(String city) 
+    {
+        return addressBookRepository.findContactByCity(city);
+
+    }
+
 
 }
