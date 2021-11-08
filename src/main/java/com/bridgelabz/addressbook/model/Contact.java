@@ -1,14 +1,28 @@
 package com.bridgelabz.addressbook.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.bridgelabz.addressbook.dto.ContactDTO;
 
 import lombok.Data;
 
+
+@Entity
+@Table(name = "addressbook")
 public @Data class Contact 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="contact_id")
 	private int contactId;
 	private String name;
     private String address;
+	@Column(name="phone_number")
 	private String phoneNumber;
 	private String city;
 	private String state;
