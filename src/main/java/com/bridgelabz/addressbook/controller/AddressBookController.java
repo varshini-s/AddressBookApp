@@ -50,7 +50,15 @@ public class AddressBookController
 
 
     }
-    //curl -X POST -H "Content-Type: application/json" -d '{"firstName": "Lisa","lastName": "Anne","address":"abc street,4th cross"}' "http://localhost:8080/addressbookservice/create" -w "\n"
+
+    @GetMapping("/state/{state}")
+    public ResponseEntity<ResponseDTO> getContactByState(@PathVariable("state") String state)
+    {
+        List<Contact> contactList =addressbookservice.getContactByState(state);
+        ResponseDTO response = new ResponseDTO("Get call success to get Contact by State",contactList);
+        return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
+
+    }
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addContactData(@Valid @RequestBody ContactDTO contactDTO)
