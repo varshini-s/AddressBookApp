@@ -24,22 +24,21 @@ public class AddressBookService implements IAddressBookService
     @Override
     public List<Contact> getContact() 
     {
-        return contactList;
+        return addressBookRepository.findAll();
     }
 
     @Override
     public Contact getContactById(int contactId) 
     {
-        return contactList.stream()
-			   .filter(contact->contact.getContactId()==contactId)
-			   .findFirst()
-			   .orElseThrow(()->new AddressBookException("Contact not found"));
+        return addressBookRepository
+			   .findById(contactId)
+			   .orElseThrow(()->new AddressBookException("Contact with contact id "+contactId+"does not exists..!"));
     }
 
     @Override
     public Contact createContact(ContactDTO contactDTO) 
     {
-        Contact contact = new Contact(contactList.size()+1,contactDTO);
+        Contact contact = new Contact(contactDTO);
         log.debug("Contact data :"+contact.toString());
         contactList.add(contact);
         return addressBookRepository.save(contact);
@@ -50,22 +49,15 @@ public class AddressBookService implements IAddressBookService
     public Contact updateContact(int contactId, ContactDTO contactDTO) 
     {
         Contact contact = this.getContactById(contactId);
-        contact.setName(contactDTO.name);
-        contact.setAddress(contactDTO.address);
-        contact.setPhoneNumber(contactDTO.phoneNumber);
-        contact.setCity(contactDTO.city);
-        contact.setState(contactDTO.state);
-        contact.setZip(contactDTO.zip);
-
-        contactList.set(contactId-1,contact);
-        return contact;
+        contact.updateContact(contactDTO);
+        return addressBookRepository.save(contact);
     }
 
     @Override
     public void deleteContact(int contactId) 
     {
-        contactList.remove(contactId-1);   
-        
+        Contact contact = this.getContactById(contactId);
+        addressBookRepository.delete(contact);
     }
 
 
