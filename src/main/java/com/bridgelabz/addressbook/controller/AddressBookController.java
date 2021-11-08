@@ -61,7 +61,7 @@ public class AddressBookController
     @GetMapping("/city/{city}")
     public ResponseEntity<ResponseDTO> getContactByCity(@PathVariable("city") String city)
     {
-        List<Contact> contactList =addressbookservice.getContactByState(city);
+        List<Contact> contactList =addressbookservice.getContactByCity(city);
         ResponseDTO response = new ResponseDTO("Get call success to get Contact by city",contactList);
         return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
 
